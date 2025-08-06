@@ -1,3 +1,66 @@
+# XIEON'S GAMING CORNER:
+### [XGC Integration](xgc-integration)
+
+This section outlines XGC’s fork of the `Stock-Prediction-Models` repository, which was archived by the original author on January 5, 2021, and has not been updated since. XGC forked the repository in its archived state and immediately released the source code as a snapshot to preserve the original codebase. XGC is developing this fork for AI and machine learning research, focusing on proof-of-concept tools for stock market prediction. Planned enhancements include integrating X platform sentiment and politician trading data to create a Discord bot slash command (`/stockmover`) for predicting stocks likely to pump or dump. The following components are planned but not yet implemented, requiring new files to be created in the `xgc-integration/` directory.
+
+1. **Repository Archival and Fork Overview** *(Planned: xgc-fork-overview.ipynb)*
+   - The original repository, archived on January 5, 2021, includes 18 deep learning models, 23 trading agents, and simulations, frozen at their 2021 state with no subsequent updates.
+   - XGC’s fork captures this codebase, and the immediate source code release ensures accessibility for researchers.
+   - XGC’s development will focus on experimental AI research, extending the repository for proof-of-concept applications.
+
+2. **X Sentiment Analysis** *(Planned: x-sentiment-analysis.ipynb)*
+   - Will fetch real-time stock mentions from the X platform using the X API to analyze retail investor sentiment.
+   - Plans to apply NLP (e.g., VADER sentiment analysis) to classify posts as bullish (pump) or bearish (dump), contributing to a sentiment score for stock ranking.
+   - Example: Aggregate sentiment for stocks like AAPL or TSLA based on hashtag frequency (#bullish, #bearish) and post volume. To be adapted from `sentiment-consensus.ipynb`.
+
+3. **Politician Trading Signals** *(Planned: politician-trading.ipynb)*
+   - Will pull insider trading data, focusing on U.S. politician trades, from APIs like Capitol Trades (https://www.capitoltrades.com/) or Quiver Quantitative (https://www.quiverquant.com/).
+   - Plans to score stocks based on transaction volume, recency, and buy/sell direction, prioritizing clustered politician buys (potential pump) or sells (potential dump).
+   - Example: Identify stocks with recent high-value politician purchases, e.g., NVIDIA (NVDA) bought by multiple Congress members.
+
+4. **Stock Mover Prediction Model** *(Planned: stock-mover-model.ipynb)*
+   - Will enhance existing deep learning models (e.g., LSTM, Dilated-CNN-Seq2seq) with new features: X sentiment scores, politician trading signals, and technical indicators (RSI, MACD).
+   - Plans to use a weighted scoring system to rank stocks by predicted price movement (pump/dump):
+     - Momentum (25%): RSI, MACD for trend detection.
+     - Volatility (20%): Bollinger Bands for swing potential.
+     - Insider Signals (20%): Politician and corporate insider trades.
+     - X Sentiment (20%): Bullish/bearish post ratios.
+     - Fundamentals (15%): EPS growth, debt-to-equity ratio.
+   - Will output top 10 stocks with confidence scores and reasons (e.g., "NVDA: Pump, 85%, politician buys, high X sentiment") for research purposes. To be built from models like `1.lstm.ipynb`.
+
+5. **Discord Bot Integration** *(Planned: discord-stockmover.ipynb)*
+   - Will implement a Discord slash command (`/stockmover`) using `discord.py` to deliver experimental predictions.
+   - Parameters: `direction` (pump, dump, both), `timeframe` (short: 7 days, medium: 30 days).
+   - Example output:
+     ```
+     **Top 10 Stocks to Pump/Dump (Short)**
+     **NVDA (Pump)**
+     Confidence: 85%
+     Reasons: Recent politician buys, high X sentiment, strong RSI
+     **TSLA (Dump)**
+     Confidence: 78%
+     Reasons: High RSI, insider sells, negative X posts
+     ```
+   - Will integrate with existing models and XGC’s new features for AI research and proof-of-concept demonstrations.
+
+**Setup Instructions**
+- Create a new directory: `xgc-integration/` to store planned notebooks and scripts.
+- Install dependencies: `pip install discord.py vaderSentiment requests tensorflow scikit-learn`.
+- Obtain API keys for X (https://developer.x.com/), Capitol Trades (https://www.capitoltrades.com/), and market data (e.g., Alpha Vantage: https://www.alphavantage.co/).
+- Configure the bot with your Discord token and API credentials in a new `xgc-integration/config.py` file (to be created).
+- Implement planned notebooks by adapting existing ones (e.g., `sentiment-consensus.ipynb` for X sentiment, `1.lstm.ipynb` for model enhancements).
+- Update dependencies to ensure compatibility with modern Python environments (e.g., Python 3.10+), as the original codebase uses pre-2021 libraries.
+- Backtest the model using historical data (post-2021, if available) with simulation notebooks (e.g., `monte-carlo-drift.ipynb`) to validate predictions for research.
+
+**Legal Disclaimers**
+- **Not Financial Advice**: XGC’s tools, models, and predictions are developed solely for AI and machine learning research and proof-of-concept purposes. They are not intended as financial advice or for use in real-world trading or investment decisions. Always consult a licensed financial advisor before making investment decisions.
+- **No Liability**: XGC and its contributors are not responsible for any financial losses, damages, or consequences resulting from the use of these tools. Stock market predictions are inherently speculative and carry significant risks.
+- **Data Usage Compliance**: Users must ensure compliance with API terms (e.g., X, Capitol Trades) and legal requirements for accessing and using financial data, including politician trading disclosures.
+- **Experimental Nature**: The tools in this section are experimental and based on a 2021 archived codebase, requiring updates for current market conditions. Results are not guaranteed and are intended for research purposes only.
+
+<img src="xgc-integration/stock-mover-example.png" width="70%" align="">
+<img src="xgc-integration/stock-mover-example.png" width="70%" align="">
+
 <p align="center">
     <a href="#readme">
         <img alt="logo" width="50%" src="output/evolution-strategy.png">
